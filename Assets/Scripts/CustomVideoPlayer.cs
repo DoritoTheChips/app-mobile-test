@@ -6,29 +6,22 @@ using UnityEngine.Video;
 public class CustomVideoPlayer : MonoBehaviour
 {
     [Header("Interface :")]
-    public GameObject fadeInterface;
-    public Image playPauseButton;
-    public Sprite playAsset;
-    public Sprite pauseAsset;
-    public TextMeshProUGUI timestamp;
-    public RectTransform progressBar;
+    [SerializeField] private GameObject fadeInterface;
+    [SerializeField] private Image playPauseButton;
+    [SerializeField] private Sprite playAsset;
+    [SerializeField] private Sprite pauseAsset;
+    [SerializeField] private TextMeshProUGUI timestamp;
+    [SerializeField] private RectTransform progressBar;
 
     [Header("Other :")]
-    public VideoPlayer videoPlayer;
-    public ScrollRect vScroll;
+    [SerializeField] private VideoPlayer videoPlayer;
+    [SerializeField] private ToggleVideoFullscreen toggleVideoFullScreen;
 
     Main main;
-    bool fullscreen;
-    RectTransform rectTransform;
-    Vector2 screenSize;
-    Vector2 defaultSize;
 
     private void Start()
     {
         main = FindObjectOfType<Main>();
-        rectTransform = GetComponent<RectTransform>();
-        screenSize = main.GetComponent<RectTransform>().sizeDelta;
-        defaultSize = rectTransform.sizeDelta;
     }
 
     void Update()
@@ -36,7 +29,7 @@ public class CustomVideoPlayer : MonoBehaviour
         timestamp.text = videoPlayer.time.ToString("00:00");
 
         var normalizedProgress = (float)(videoPlayer.time / videoPlayer.length);
-        progressBar.sizeDelta = new Vector2(screenSize.x * normalizedProgress, progressBar.sizeDelta.y);
+        progressBar.sizeDelta = new Vector2(main.screenSize.x * normalizedProgress, progressBar.sizeDelta.y);
     }
 
     public void ToggleResume()
@@ -61,25 +54,6 @@ public class CustomVideoPlayer : MonoBehaviour
 
     public void FullScreen()
     {
-        fullscreen = !fullscreen;
-
-        if (fullscreen)
-        {
-            Screen.orientation = ScreenOrientation.Landscape;
-            main.banner.SetActive(false);
-            rectTransform.sizeDelta = new Vector2(screenSize.y, screenSize.x);
-            vScroll.enabled = false;
-            vScroll.verticalNormalizedPosition = 0;
-            main.hScroll.active = false;
-        }
-
-        else
-        {
-            Screen.orientation = ScreenOrientation.AutoRotation;
-            main.banner.SetActive(true);
-            rectTransform.sizeDelta = defaultSize;
-            vScroll.enabled = true;
-            main.hScroll.active = true;
-        }
+        toggleVideoFullScreen.Toggle();
     }
 }

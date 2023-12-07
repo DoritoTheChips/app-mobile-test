@@ -8,20 +8,24 @@ public class Main : MonoBehaviour
     public GameObject banner;
     public TextMeshProUGUI bannerLabel;
 
-    public TMP_InputField episodeNameInput;
-    public TMP_InputField viewsCountInput;
-
-    public TextMeshProUGUI episodeNameLabel;
-    public TextMeshProUGUI viewsCountLabel;
+    private ScreenOrientation currentOrientation;
+    private RectTransform rectTransform;
+    public Vector2 screenSize;
 
     private void Start()
     {
+        rectTransform = GetComponent<RectTransform>();
+        screenSize = rectTransform.sizeDelta;
         Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
-    public void ApplyVideoInformation()
+    private void Update()
     {
-        episodeNameLabel.text = episodeNameInput.text;
-        viewsCountLabel.text = viewsCountInput.text;
+        // Change the screen size if the orientation changed
+        if (currentOrientation != Screen.orientation)
+        {
+            currentOrientation = Screen.orientation;
+            screenSize = rectTransform.sizeDelta;
+        }
     }
 }

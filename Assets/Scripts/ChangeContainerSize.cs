@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ChangeContainerSize : MonoBehaviour
 {
-    public int pageCount = 1;
+    [SerializeField] int pageCount = 1;
 
-    Main main;
-    RectTransform rectTransform;
+    private Main main;
+    private RectTransform rectTransform;
 
     private void Start()
     {
@@ -15,7 +15,7 @@ public class ChangeContainerSize : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
-    void Update()
+    private void Update()
     {
         UpdateContainerSize();
     }
@@ -23,9 +23,9 @@ public class ChangeContainerSize : MonoBehaviour
     /// <summary>
     /// Update the size of the container to fit to the screen.  
     /// </summary>
-    void UpdateContainerSize()
+    private void UpdateContainerSize()
     {
-        float trueScreenWidth = main.GetComponent<RectTransform>().sizeDelta.x * pageCount;
+        float trueScreenWidth = main.screenSize.x * pageCount;
         rectTransform.sizeDelta = new Vector2(trueScreenWidth, rectTransform.sizeDelta.y);
     }
 }

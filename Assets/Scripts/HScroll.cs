@@ -11,22 +11,20 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class HScroll : MonoBehaviour
 {
-    Main main;
-    RectTransform rectTransform;
+    private Main main;
+    private RectTransform rectTransform;
 
-    public bool changeBannerName;
+    public bool active = true;
+    [SerializeField] private float sensitivity = 10;
+    [SerializeField] private float smoothingSpeed = 5;
 
-    public bool active;
-    public float sensitivity = 10;
-    public float smoothingSpeed = 5;
+    private bool forceSwipe;
+    private float forceSwipeCooldown;
+    private int forceSwipeToPage;
 
-    bool forceSwipe;
-    float forceSwipeCooldown;
-    int forceSwipeToPage;
-
-    Vector2 startTouchPosition;
-    Vector2 startScreenPosition;
-    Vector2 nextPosition;
+    private Vector2 startTouchPosition;
+    private Vector2 startScreenPosition;
+    private Vector2 nextPosition;
 
     private void Start()
     {
@@ -52,10 +50,12 @@ public class HScroll : MonoBehaviour
 
     void UpdateSwap()
     {
+        var trueScreenWidth = main.screenSize.x;
+
         // Force swipe to a page
         if (forceSwipe)
         {
-            nextPosition.x = rectTransform.sizeDelta.x * -forceSwipeToPage;
+            nextPosition.x = trueScreenWidth * -forceSwipeToPage;
             forceSwipeCooldown -= Time.deltaTime;
             forceSwipe = forceSwipeCooldown > 0;
         }
@@ -63,12 +63,12 @@ public class HScroll : MonoBehaviour
         // Snap the position based on the screen size
         else if (Input.touchCount <= 0)
         {
-            var snapedPos = Mathf.RoundToInt(rectTransform.anchoredPosition.x / rectTransform.sizeDelta.x) * rectTransform.sizeDelta.x;
+            var snapedPos = Mathf.RoundToInt(rectTransform.anchoredPosition.x / trueScreenWidth) * trueScreenWidth;
             nextPosition.x = snapedPos;
         }
 
         // User touched screen
-        else
+        else if (active)
         {
             var touchInput = Input.GetTouch(0);
 
@@ -87,11 +87,11 @@ public class HScroll : MonoBehaviour
         }
 
         // Clamp and make a fluid movement
-        nextPosition.x = Mathf.Clamp(nextPosition.x, -((transform.childCount - 1) * rectTransform.sizeDelta.x), 0);
+        nextPosition.x = Mathf.Clamp(nextPosition.x, -((transform.childCount - 1) * trueScreenWidth), 0);
         rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, nextPosition, Time.deltaTime * smoothingSpeed);
 
         // Change banner label based on position
-        var pageIndex = Mathf.RoundToInt(rectTransform.anchoredPosition.x / rectTransform.sizeDelta.x) + 1;
+        var pageIndex = Mathf.RoundToInt(rectTransform.anchoredPosition.x / trueScreenWidth) + 1;
         pageIndex = Mathf.Clamp(pageIndex, 0, transform.childCount);
         main.bannerLabel.text = transform.GetChild(pageIndex).name;
     }
