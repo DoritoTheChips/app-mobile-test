@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using TMPro;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,12 +12,13 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class HScroll : MonoBehaviour
 {
-    private Main main;
+    private ScreenSizeProvider screenSizeProvider;
     private RectTransform rectTransform;
 
     public bool active = true;
     [SerializeField] private float sensitivity = 10;
     [SerializeField] private float smoothingSpeed = 5;
+    [SerializeField] private TextMeshProUGUI bannerLabel;
 
     private bool forceSwipe;
     private float forceSwipeCooldown;
@@ -28,7 +30,7 @@ public class HScroll : MonoBehaviour
 
     private void Start()
     {
-        main = FindObjectOfType<Main>();
+        screenSizeProvider = FindObjectOfType<ScreenSizeProvider>();
         rectTransform = GetComponent<RectTransform>();
     }
 
@@ -50,7 +52,7 @@ public class HScroll : MonoBehaviour
 
     void UpdateSwap()
     {
-        var trueScreenWidth = main.screenSize.x;
+        var trueScreenWidth = screenSizeProvider.screenSize.x;
 
         // Force swipe to a page
         if (forceSwipe)
@@ -91,8 +93,8 @@ public class HScroll : MonoBehaviour
         rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, nextPosition, Time.deltaTime * smoothingSpeed);
 
         // Change banner label based on position
-        var pageIndex = Mathf.RoundToInt(rectTransform.anchoredPosition.x / trueScreenWidth) + 1;
+        var pageIndex = Mathf.RoundToInt(Mathf.Abs(rectTransform.anchoredPosition.x / trueScreenWidth));
         pageIndex = Mathf.Clamp(pageIndex, 0, transform.childCount);
-        main.bannerLabel.text = transform.GetChild(pageIndex).name;
+        bannerLabel.text = transform.GetChild(pageIndex).name;
     }
 }

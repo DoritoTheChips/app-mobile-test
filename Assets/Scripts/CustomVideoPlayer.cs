@@ -17,11 +17,11 @@ public class CustomVideoPlayer : MonoBehaviour
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private ToggleVideoFullscreen toggleVideoFullScreen;
 
-    Main main;
+    private ScreenSizeProvider screenSizeProvider;
 
     private void Start()
     {
-        main = FindObjectOfType<Main>();
+        screenSizeProvider = FindObjectOfType<ScreenSizeProvider>();
     }
 
     void Update()
@@ -29,7 +29,7 @@ public class CustomVideoPlayer : MonoBehaviour
         timestamp.text = videoPlayer.time.ToString("00:00");
 
         var normalizedProgress = (float)(videoPlayer.time / videoPlayer.length);
-        progressBar.sizeDelta = new Vector2(main.screenSize.x * normalizedProgress, progressBar.sizeDelta.y);
+        progressBar.sizeDelta = new Vector2(screenSizeProvider.screenSize.x * normalizedProgress, progressBar.sizeDelta.y);
     }
 
     public void ToggleResume()
@@ -40,13 +40,13 @@ public class CustomVideoPlayer : MonoBehaviour
             Resume();
     }
 
-    public void Resume()
+    private void Resume()
     {
         videoPlayer.Play();
         playPauseButton.sprite = pauseAsset;
     }
 
-    public void Pause()
+    private void Pause()
     {
         videoPlayer.Pause();
         playPauseButton.sprite = playAsset;

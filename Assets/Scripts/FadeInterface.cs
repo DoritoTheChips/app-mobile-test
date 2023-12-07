@@ -2,15 +2,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Video;
 
+[RequireComponent(typeof(CanvasGroup))]
 public class FadeInterface : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private float fadeInSpeed = 2;
     [SerializeField] private float fadeOutSpeed = 5;
     [SerializeField] private float fadeHoldTime = 3;
     [SerializeField] private VideoPlayer videoPlayer;
-    [SerializeField] private CanvasGroup canvasGroup;
+    
+    private CanvasGroup canvasGroup;
 
     private float fadeCooldown = 0;
+
+    private void Start()
+    {
+        canvasGroup = GetComponent<CanvasGroup>();
+    }
 
     private void Update()
     {

@@ -901,10 +901,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34d1ed6dd4756b4fbe66d9b3b9ed3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeBannerName: 0
   active: 1
   sensitivity: 2.5
   smoothingSpeed: 10
+  bannerLabel: {fileID: 701786868}
 --- !u!114 &242461250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2189,6 +2189,7 @@ MonoBehaviour:
   swipeButton: {fileID: 1969554034}
   vScroll: {fileID: 1079292067}
   hScroll: {fileID: 242461249}
+  banner: {fileID: 1390262624}
 --- !u!1 &903730292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,7 +3155,7 @@ GameObject:
   - component: {fileID: 1071763997}
   - component: {fileID: 1071763996}
   m_Layer: 5
-  m_Name: Button_Play
+  m_Name: Button_PlayPauseToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4040,8 +4041,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hScroll: {fileID: 242461249}
-  banner: {fileID: 1390262624}
-  bannerLabel: {fileID: 701786868}
   screenSize: {x: 0, y: 0}
 --- !u!1 &1357051286
 GameObject:
@@ -4745,7 +4744,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1666288962}
-  - component: {fileID: 1666288964}
   - component: {fileID: 1666288963}
   m_Layer: 5
   m_Name: PageContainer
@@ -4800,19 +4798,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1666288964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1666288961}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f0889b5b56b074fa99d490b41d0785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pageCount: 2
 --- !u!1 &1697372738
 GameObject:
   m_ObjectHideFlags: 0
@@ -5657,7 +5642,7 @@ GameObject:
   - component: {fileID: 2142736779}
   - component: {fileID: 2142736781}
   m_Layer: 5
-  m_Name: InterfaceFade
+  m_Name: VideoControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

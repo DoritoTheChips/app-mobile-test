@@ -8,8 +8,9 @@ public class ToggleVideoFullscreen : MonoBehaviour
     [SerializeField] private Button swipeButton;
     [SerializeField] private ScrollRect vScroll;
     [SerializeField] private HScroll hScroll;
+    [SerializeField] private GameObject banner;
 
-    private Main main;
+    private ScreenSizeProvider screenSizeProvider;
     private bool inFullscreen;
     private RectTransform rectTransform;
     private RectTransform scrollBarRect;
@@ -19,7 +20,7 @@ public class ToggleVideoFullscreen : MonoBehaviour
 
     public void Start()
     {
-        main = FindObjectOfType<Main>();
+        screenSizeProvider = FindObjectOfType<ScreenSizeProvider>();
         rectTransform = GetComponent<RectTransform>();
         scrollBarRect = vScroll.verticalScrollbar.GetComponent<RectTransform>();
         defaultScrollbarWidth = scrollBarRect.sizeDelta.x;
@@ -31,7 +32,7 @@ public class ToggleVideoFullscreen : MonoBehaviour
         // Change size to fit screen (every frame...)
         rectTransform.sizeDelta =
             inFullscreen
-            ? new Vector2(main.screenSize.x, main.screenSize.y)
+            ? new Vector2(screenSizeProvider.screenSize.x, screenSizeProvider.screenSize.y)
             : defaultSize;
     }
 
@@ -48,7 +49,7 @@ public class ToggleVideoFullscreen : MonoBehaviour
         inFullscreen = true;
         
         // Hide objects in the way
-        main.banner.SetActive(false);
+        banner.SetActive(false);
         swipeButton.gameObject.SetActive(false);
         vScroll.verticalScrollbarSpacing = -defaultScrollbarWidth;
         scrollBarRect.sizeDelta *= Vector2.up;
@@ -68,7 +69,7 @@ public class ToggleVideoFullscreen : MonoBehaviour
         inFullscreen = false;
 
         // Show objects in the way
-        main.banner.SetActive(true);
+        banner.SetActive(true);
         swipeButton.gameObject.SetActive(true);
         scrollBarRect.sizeDelta += Vector2.right * defaultScrollbarWidth;
         vScroll.verticalScrollbarSpacing = -3;

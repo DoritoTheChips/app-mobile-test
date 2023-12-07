@@ -1,12 +1,9 @@
 using UnityEngine;
 using TMPro;
 
-public class Main : MonoBehaviour
+public class ScreenSizeProvider : MonoBehaviour
 {
     public HScroll hScroll;
-
-    public GameObject banner;
-    public TextMeshProUGUI bannerLabel;
 
     private ScreenOrientation currentOrientation;
     private RectTransform rectTransform;

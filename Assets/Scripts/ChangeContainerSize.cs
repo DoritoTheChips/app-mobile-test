@@ -6,12 +6,12 @@ public class ChangeContainerSize : MonoBehaviour
 {
     [SerializeField] int pageCount = 1;
 
-    private Main main;
+    private ScreenSizeProvider screenSizeProvider;
     private RectTransform rectTransform;
 
     private void Start()
     {
-        main = FindObjectOfType<Main>();
+        screenSizeProvider = FindObjectOfType<ScreenSizeProvider>();
         rectTransform = GetComponent<RectTransform>();
     }
 
@@ -25,7 +25,7 @@ public class ChangeContainerSize : MonoBehaviour
     /// </summary>
     private void UpdateContainerSize()
     {
-        float trueScreenWidth = main.screenSize.x * pageCount;
+        float trueScreenWidth = screenSizeProvider.screenSize.x * pageCount;
         rectTransform.sizeDelta = new Vector2(trueScreenWidth, rectTransform.sizeDelta.y);
     }
 }
