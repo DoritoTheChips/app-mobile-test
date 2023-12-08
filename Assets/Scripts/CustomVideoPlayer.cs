@@ -6,7 +6,6 @@ using UnityEngine.Video;
 public class CustomVideoPlayer : MonoBehaviour
 {
     [Header("Interface :")]
-    [SerializeField] private GameObject fadeInterface;
     [SerializeField] private Image playPauseButton;
     [SerializeField] private Sprite playAsset;
     [SerializeField] private Sprite pauseAsset;

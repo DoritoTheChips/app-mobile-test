@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 205588883}
   - component: {fileID: 205588882}
   m_Layer: 5
-  m_Name: Image_Thumb
+  m_Name: Image_Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -932,7 +932,7 @@ GameObject:
   - component: {fileID: 350710766}
   - component: {fileID: 350710769}
   m_Layer: 5
-  m_Name: Video
+  m_Name: VideoPlayer_Video
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2166,7 +2166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f53a38f7947d474ba68c92897031feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeInterface: {fileID: 2142736776}
   playPauseButton: {fileID: 1071763997}
   playAsset: {fileID: 21300000, guid: 9d8d0d0537586ec47b50979ffdabeb0e, type: 3}
   pauseAsset: {fileID: 21300000, guid: a9d57072b6e357845ad4dde057b25b65, type: 3}
@@ -3287,7 +3286,7 @@ GameObject:
   - component: {fileID: 1079292068}
   - component: {fileID: 1079292067}
   m_Layer: 5
-  m_Name: ScrollView
+  m_Name: VScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4040,7 +4039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc012ddf7775854298ebace66cdd75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hScroll: {fileID: 242461249}
   screenSize: {x: 0, y: 0}
 --- !u!1 &1357051286
 GameObject:
@@ -4405,7 +4403,7 @@ GameObject:
   - component: {fileID: 1391204697}
   - component: {fileID: 1391204696}
   m_Layer: 5
-  m_Name: Button_Play
+  m_Name: Image_PlayCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5090,7 +5088,7 @@ GameObject:
   - component: {fileID: 1969554034}
   - component: {fileID: 1969554033}
   m_Layer: 5
-  m_Name: Button_Client
+  m_Name: Button_Editor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5430,8 +5428,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1733200185}
-        m_TargetAssemblyTypeName: VideoEditor, Assembly-CSharp
-        m_MethodName: ApplyVideoInformation
+        m_TargetAssemblyTypeName: SaveVideoInformation, Assembly-CSharp
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

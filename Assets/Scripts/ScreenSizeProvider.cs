@@ -3,8 +3,6 @@ using TMPro;
 
 public class ScreenSizeProvider : MonoBehaviour
 {
-    public HScroll hScroll;
-
     private ScreenOrientation currentOrientation;
     private RectTransform rectTransform;
     public Vector2 screenSize;
