@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
 using TMPro;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 /// <summary>
 /// Script that managed the horizontal scrolling / swiping of the screen.
